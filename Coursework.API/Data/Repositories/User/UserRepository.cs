@@ -1,5 +1,4 @@
-﻿using Core.Models.Origin;
-using Data.Repositories.Generic;
+﻿using Data.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 

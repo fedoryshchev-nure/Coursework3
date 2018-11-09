@@ -2,8 +2,8 @@
 
 namespace BusinessLogic.Services.UserService
 {
-    public interface IUserServcie
+    public interface IUserServiсe
     {
-        Task<bool> IsWallsOkayAsync(string email);
+        Task<bool> AreWallsOkayAsync(string email);
     }
 }

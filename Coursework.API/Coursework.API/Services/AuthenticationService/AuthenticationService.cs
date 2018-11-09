@@ -24,14 +24,14 @@ namespace Coursework.API.Services.AuthenticationService
             this.mapper = mapper;
         }
 
-        public async Task<AuthenticationToken> Authenticate(LoginModel user)
+        public async Task<string> Authenticate(LoginModel user)
         {
             var claims = await GetIdentityAsync(user.Email, user.Password);
             if (claims != null)
             {
                 var token = BuildToken(claims);
 
-                return new AuthenticationToken(token, user.Email);
+                return token;
             }
             else
                 throw new Exception("Invalid username or password.");

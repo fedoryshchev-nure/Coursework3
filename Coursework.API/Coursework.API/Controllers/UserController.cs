@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Coursework.API.Controllers
 {
     [Authorize]
-    [Route("[contoller]/[action]")]
+    [Route("[controller]/[action]")]
     public class UserController : Controller
     {
-        private readonly IUserServcie userServcie;
+        private readonly IUserServiсe userServcie;
 
-        public UserController(IUserServcie userServcie)
+        public UserController(IUserServiсe userServcie)
         {
             this.userServcie = userServcie;
         }
@@ -24,7 +24,7 @@ namespace Coursework.API.Controllers
         {
             try
             {
-                bool isOkey = await userServcie.IsWallsOkayAsync(
+                bool isOkey = await userServcie.AreWallsOkayAsync(
                     User.FindFirst(
                         ClaimTypes.Email)
                         ?.Value);

@@ -1,0 +1,5 @@
+<div *ngIf="warningMessages.length">
+  <div class="alert alert-warning" *ngFor="let warningMessage of warningMessages">
+    <div>{{warningMessage}}</div>
+  </div>
+</div>

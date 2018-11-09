@@ -4,16 +4,16 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services.UserService
 {
-    public class UserServcie
+    public class UserServiсe : IUserServiсe
     {
         private readonly IUnitOfWork unitOfWork;
 
-        public UserServcie(IUnitOfWork unitOfWork)
+        public UserServiсe(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> IsWallsOkay(string email)
+        public async Task<bool> AreWallsOkayAsync(string email)
         {
             var sensors = (await unitOfWork.Users
                 .GetWithWallsAndSensorsAsync(email))
@@ -23,8 +23,6 @@ namespace BusinessLogic.Services.UserService
                 sensors.Count(x => x.IsBroken == true);
 
             return (double)brokenSensorsCount / sensors.Count() < 0.3;
-
-
         }
     }
 }

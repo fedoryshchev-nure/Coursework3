@@ -6,6 +6,6 @@ namespace Coursework.API.Services.AuthenticationService
     public interface IAuthenticationService
     {
         Task RegisterAsync(UserDTO user);
-        Task<AuthenticationToken> Authenticate(LoginModel user);
+        Task<string> Authenticate(LoginModel user);
     }
 }

@@ -21,7 +21,7 @@ namespace Coursework.API.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ActionName("token")]
-        public async Task<ActionResult<AuthenticationToken>> Token([FromBody]LoginModel model)
+        public async Task<ActionResult<string>> Token([FromBody]LoginModel model)
         {
             try
             {

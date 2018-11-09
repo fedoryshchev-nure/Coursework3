@@ -1,19 +1,18 @@
 ﻿using AutoMapper;
+using BusinessLogic.Services.UserService;
 using Coursework.API.Options;
 using Coursework.API.Services.AuthenticationService;
+using Coursework.API.Services.SensorService;
 using Data;
 using Data.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.IO;
 
 namespace Coursework.API
 {
@@ -58,12 +57,24 @@ namespace Coursework.API
 
             services.AddAutoMapper();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
+                });
+            });
+
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDBContext>(options =>
                 options.UseSqlServer(connection));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<ISensorService, SensorService>();
+
+            services.AddScoped<IUserServiсe, UserServiсe>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,6 +92,8 @@ namespace Coursework.API
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
+
+            app.UseCors("EnableCORS");
 
             app.UseMvc();
         }

@@ -1,0 +1,88 @@
+<div class="col-md-4 offset-4">
+  <form [formGroup]="signUpForm" #sgUpForm="ngForm">
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" class="form-control" formControlName="Email" required>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="sgUpForm.submitted && this.signUpForm.controls[email].errors">
+      <div *ngIf="this.signUpForm.controls[email].errors.required">
+        Email is required.
+      </div>
+      <div *ngIf="this.signUpForm.controls[email].errors.email">
+        Incorrect Email.
+      </div>
+    </div> 
+
+
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="password" class="form-control" formControlName="Password" required>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="sgUpForm.submitted && this.signUpForm.controls[password].errors">
+      <div *ngIf="this.signUpForm.controls[password].errors.required">
+        Password is required.
+      </div>
+      <div *ngIf="this.signUpForm.controls[password].errors.minlength">
+        Password has to be at least 6 characters long.
+      </div>  
+    </div>
+
+
+    <div class="form-group">
+      <label>Confirm password:</label>
+      <input type="password" class="form-control" formControlName="ConfirmPassword" required>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="sgUpForm.submitted && this.signUpForm.controls[confirmPassword].errors">
+      <div *ngIf="this.signUpForm.controls[confirmPassword].errors.required">
+        Confirm password.
+      </div>
+      <div *ngIf="this.signUpForm.controls[confirmPassword].errors.minlength">
+        Confirm password has to be at least 6 characters long.
+      </div>  
+      <div *ngIf="this.signUpForm.controls[confirmPassword].errors.match">
+        Confirm password doesn't match.
+      </div>  
+    </div>
+
+
+    <div class="form-group">
+      <label>First name:</label>
+      <input type="text" class="form-control" formControlName="FirstName" required>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="sgUpForm.submitted && this.signUpForm.controls[firstName].errors">
+      <div *ngIf="this.signUpForm.controls[firstName].errors.required">
+        First name is required.
+      </div>
+      <div *ngIf="this.signUpForm.controls[firstName].errors.pattern">
+        Enter correct First name.
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label>Last name:</label>
+      <input type="text" class="form-control" formControlName="LastName" required>
+    </div>
+  
+    <div class="alert alert-danger" *ngIf="sgUpForm.submitted && this.signUpForm.controls[lastName].errors">
+      <div *ngIf="this.signUpForm.controls[lastName].errors.required">
+        Last name is required.
+      </div>
+      <div *ngIf="this.signUpForm.controls[lastName].errors.pattern">
+        Enter correct Last name.
+      </div>
+    </div>      
+
+    <button type="submit" (click)="onSubmit()" class="btn btn-primary ml-2">Submit</button>  
+  </form>
+  <br>
+</div>
+
+<div class="col-md-4 offset-4">
+  <app-errors [errorMessages]="errorMessages" >
+  </app-errors>
+</div>

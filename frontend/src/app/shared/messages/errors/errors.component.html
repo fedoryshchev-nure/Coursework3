@@ -1,0 +1,5 @@
+<div *ngIf="errorMessages.length">
+  <div class="alert alert-danger" *ngFor="let errorMessage of errorMessages">
+    <div>{{errorMessage}}</div>
+  </div>
+</div>

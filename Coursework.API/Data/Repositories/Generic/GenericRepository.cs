@@ -8,12 +8,12 @@ namespace Data.Repositories.Generic
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : Entity
     {
         public ApplicationDBContext context;
-        public DbSet<TEntity> set;
+        public DbSet<TEntity> set => this.context.Set<TEntity>();
 
         public GenericRepository(ApplicationDBContext context)
         {
             this.context = context;
-            set = context.Set<TEntity>();
+            // set = context.Set<TEntity>();
         }
 
         public void Remove(TEntity entity)
