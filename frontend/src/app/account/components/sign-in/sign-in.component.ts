@@ -37,7 +37,7 @@ export class SignInComponent implements OnInit {
         this.signInForm.controls['Password'].value
       );
       this.accountService.signIn(signInModel).subscribe(token => {
-        sessionStorage['jwt'] = token;
+        sessionStorage.setItem('jwt', token.value);
       }, error => {
         this.errorMessages = error.error;
       });

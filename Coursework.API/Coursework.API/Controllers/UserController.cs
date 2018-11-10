@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BusinessLogic.Services.UserService;
+using Core.Models.Origin;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coursework.API.Controllers
@@ -12,9 +15,13 @@ namespace Coursework.API.Controllers
     public class UserController : Controller
     {
         private readonly IUserServiсe userServcie;
+        private readonly UserManager<User> userManager;
 
-        public UserController(IUserServiсe userServcie)
+        public UserController(
+            UserManager<User> userManager,
+            IUserServiсe userServcie)
         {
+            this.userManager = userManager;
             this.userServcie = userServcie;
         }
 
@@ -25,9 +32,9 @@ namespace Coursework.API.Controllers
             try
             {
                 bool isOkey = await userServcie.AreWallsOkayAsync(
-                    User.FindFirst(
-                        ClaimTypes.Email)
-                        ?.Value);
+                    User.Claims
+                        .FirstOrDefault(x => x.Type == ClaimTypes.Email)
+                        .Value);
 
                 return Ok(isOkey);
             }

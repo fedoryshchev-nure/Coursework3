@@ -8,7 +8,7 @@ namespace Coursework.API.Options
         public const string ISSUER = "MyAuthServer"; // издатель токена
         public const string AUDIENCE = "http://localhost:57660/"; // потребитель токена
         const string KEY = "mysupersecret_secretkey!123";   // ключ для шифрации
-        public const int LIFETIME = 1; // время жизни токена - 1 минута
+        public const int LIFETIME_DAYS = 1; // время жизни токена - 1 минута
 
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {

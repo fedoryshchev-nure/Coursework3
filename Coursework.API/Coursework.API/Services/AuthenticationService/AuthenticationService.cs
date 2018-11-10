@@ -8,47 +8,50 @@ using Core.Models.Origin;
 using Coursework.API.DTOs;
 using Coursework.API.Options;
 using Data.UnitOfWork;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Coursework.API.Services.AuthenticationService
 {
     public class AuthenticationService : IAuthenticationService
     {
+        private readonly SignInManager<User> signInManager;
+        private readonly UserManager<User> userManager;
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
-        public AuthenticationService(IUnitOfWork unitOfWork,
+        public AuthenticationService(
+            SignInManager<User> signInManager,
+            UserManager<User> userManager,
+            IUnitOfWork unitOfWork,
             IMapper mapper)
         {
+            this.signInManager = signInManager;
+            this.userManager = userManager;
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
 
-        public async Task<string> Authenticate(LoginModel user)
+        public async Task<AuthenticationToken> Authenticate(LoginModel model, IEnumerable<Claim> claims)
         {
-            var claims = await GetIdentityAsync(user.Email, user.Password);
-            if (claims != null)
+            var result = await signInManager
+                .PasswordSignInAsync(model.Email, model.Password, false, false);
+
+            if (result.Succeeded)
             {
                 var token = BuildToken(claims);
 
-                return token;
+                return new AuthenticationToken { Value = token };
             }
             else
                 throw new Exception("Invalid username or password.");
         }
 
-        public async Task RegisterAsync(UserDTO user)
-        {
-            await unitOfWork.Users.AddAsync(mapper.Map<User>(user));
-
-            await unitOfWork.CompleteAsync();
-        }
-
         private string BuildToken(IEnumerable<Claim> claims)
         {
             var now = DateTime.UtcNow;
-            var expires = now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME));
-            var signedKey = new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), 
+            var expires = now.Add(TimeSpan.FromDays(AuthOptions.LIFETIME_DAYS));
+            var signedKey = new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(),
                 SecurityAlgorithms.HmacSha256);
 
             var jwt = new JwtSecurityToken(
@@ -64,23 +67,30 @@ namespace Coursework.API.Services.AuthenticationService
             return token;
         }
 
-        private async Task<IEnumerable<Claim>> GetIdentityAsync(string email, string password)
+        public async Task RegisterAsync(UserDTO dto)
         {
-            var hashedPassword = password.GetHashCode().ToString();
-            User user = await unitOfWork.Users.GetAsync(email, hashedPassword);
+            var user = mapper.Map<User>(dto);
+            var result = await userManager.CreateAsync(user, dto.Password);
 
-            if (user != null)
+            if (result.Succeeded)
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Role),
-                };
-
-                return claims;
+                AddAllClaimsToUserAsync(user);
+                AddAllRolesToUserAsync(user);
             }
-
-            return null;
+            else
+                throw new Exception("Registration failed");
         }
+
+        private async Task AddAllClaimsToUserAsync(User user)
+        {
+            await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
+        }
+
+        private async Task AddAllRolesToUserAsync(User user)
+        {
+            await userManager.AddToRoleAsync(user, "User");
+        }
+
+
     }
 }

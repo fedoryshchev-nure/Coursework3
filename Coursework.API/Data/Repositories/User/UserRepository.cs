@@ -10,15 +10,9 @@ namespace Data.Repositories.User
         {
         }
 
-        public async Task<Core.Models.Origin.User> GetAsync(string email, string pass)
-        {
-            return await set.FirstOrDefaultAsync(x => x.Email == email &&
-                x.HashedPassword == pass);
-        }
-
         public async Task<Core.Models.Origin.User> GetWithWallsAndSensorsAsync(string email)
         {
-            return await set
+            return await Set
                 .Include(x => x.Walls)
                     .ThenInclude(x => x.WallSensors)
                 .FirstOrDefaultAsync(x => x.Email == email);

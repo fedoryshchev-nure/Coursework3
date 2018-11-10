@@ -1,7 +1,8 @@
 ﻿namespace Core.Models.Origin
 {
-    public class Sensor : Entity
+    public class Sensor : IEntity
     {
+        public string Id { get; set; }
         public bool IsBroken { get; set; }
         public string Password { get; set; }
 

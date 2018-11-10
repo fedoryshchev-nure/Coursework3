@@ -10,10 +10,8 @@ namespace Coursework.API.MapperProfiles
         {
             CreateMap<User, UserDTO>()
                 .ReverseMap()
-                .ForMember(dest => dest.HashedPassword,
-                    src => src.MapFrom(x => x.Password.GetHashCode().ToString()))
-                .ForMember(dest => dest.Role,
-                    src => src.MapFrom(x => "User"));
+                .ForMember(dest => dest.UserName,
+                    src => src.MapFrom(x => x.Email));
         }
     }
 }
