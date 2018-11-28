@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Threading.Tasks;
 
 namespace Coursework.API
 {
@@ -35,6 +36,11 @@ namespace Coursework.API
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
+                    options.Events.OnAuthenticationFailed = context =>
+                    {
+                        context.Response.StatusCode = 401;
+                        return Task.CompletedTask;
+                    };
                     options.RequireHttpsMetadata = false;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -100,7 +106,7 @@ namespace Coursework.API
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseStatusCodePages();
 
             app.UseAuthentication();
 

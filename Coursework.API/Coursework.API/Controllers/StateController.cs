@@ -11,13 +11,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace Coursework.API.Controllers
 {
     [Authorize]
-    [Route("[controller]/[action]")]
-    public class UserController : Controller
+    [Route("[controller]")]
+    public class StateController : Controller
     {
         private readonly IUserServiсe userServcie;
         private readonly UserManager<User> userManager;
 
-        public UserController(
+        public StateController(
             UserManager<User> userManager,
             IUserServiсe userServcie)
         {
@@ -26,8 +26,7 @@ namespace Coursework.API.Controllers
         }
 
         [HttpGet]
-        [ActionName("state")]
-        public async Task<ActionResult<bool>> State()
+        public async Task<ActionResult<bool>> Get()
         {
             try
             {
