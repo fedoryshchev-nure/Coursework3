@@ -9,7 +9,7 @@ import { SignUpModel } from '../models/sign-up-model';
 import { AuthenticationToken } from '../models/authentication-token';
 
 const headers = new HttpHeaders({
-  'Content-Type':'application/json; charset=utf-8',
+  'Content-Type': 'application/json; charset=utf-8',
 });
 
 @Injectable({
@@ -21,7 +21,7 @@ export class AccountService {
     private http: HttpClient
   ) { }
 
-  public signIn(signInModel: SignInModel) : Observable<AuthenticationToken> {
+  public signIn(signInModel: SignInModel): Observable<AuthenticationToken> {
     return this.http.post<AuthenticationToken>(
       `${environment.apiLink}/account/token`,
       signInModel,
@@ -35,9 +35,5 @@ export class AccountService {
       signUpModel,
       { headers: headers }
     );
-  }
-
-  public signOut(): void {
-    sessionStorage.removeItem('jwt');
   }
 }

@@ -1,0 +1,18 @@
+<div class="container">
+  <br>
+  <br>
+  <div class="row">
+    <div class="col offset-4">
+      <button type="submit" (click)="getState()" class="btn btn-primary">Get current wall state</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <app-success [successMessages]="successMessages">
+  </app-success>
+  <app-errors [errorMessages]="errorMessages">
+  </app-errors>
+</div>
+
+
+

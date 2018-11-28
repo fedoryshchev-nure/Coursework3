@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Validators, FormBuilder } from '@angular/forms';
 
 import { ConfirmPassValdiator } from 'app/account/validators/confirm-pass-validator';
@@ -11,21 +12,21 @@ import { AccountService } from 'app/account/services/account.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  email: string = 'Email';
-  password: string = 'Password';
-  confirmPassword: string = 'ConfirmPassword';
-  firstName: string = 'FirstName';
-  lastName: string = 'LastName';
+  email = 'Email';
+  password = 'Password';
+  confirmPassword = 'ConfirmPassword';
+  firstName = 'FirstName';
+  lastName = 'LastName';
 
   errorMessages: string[] = [];
 
   signUpForm = this.fb.group({
     FirstName: ['', [
       Validators.required,
-      Validators.pattern("[a-zA-ZА-Яа-яёЁ]{2,11}")
+      Validators.pattern('[a-zA-ZА-Яа-яёЁ]{2,11}')
     ]],
     LastName: ['', [Validators.required,
-      Validators.pattern("[a-zA-ZА-Яа-яёЁ]{2,11}")
+      Validators.pattern('[a-zA-ZА-Яа-яёЁ]{2,11}')
     ]],
     Email: ['', [Validators.required, Validators.email]],
     Password: ['', [Validators.required, Validators.minLength(6)]],
@@ -34,7 +35,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -42,10 +44,11 @@ export class SignUpComponent implements OnInit {
       ConfirmPassValdiator(this.signUpForm));
   }
 
-  onSubmit() : void {
-    if(this.signUpForm.valid)
-    {
+  onSubmit():
+   void {
+    if (this.signUpForm.valid) {
       this.accountService.signUp(this.signUpForm.value).subscribe(x => {
+        this.router.navigate(['/account/signin']);
       }, error => {
         this.errorMessages = error.error;
       });

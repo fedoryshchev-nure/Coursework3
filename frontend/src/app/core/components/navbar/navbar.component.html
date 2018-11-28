@@ -1,0 +1,15 @@
+<div class="container"> 
+    <nav class="navbar navbar-dark bg-primary">
+      <a routerLink="/" class="navbar-brand">Navbar</a>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle btn-outline-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span>Sign&nbsp;</span>
+        </button>
+        <div class="dropdown-menu">
+          <span routerLink="/account/signin" *ngIf="!isSignedIn()" class="dropdown-item">In</span>
+          <span routerLink="/account/signup" *ngIf="!isSignedIn()" class="dropdown-item">Up</span>
+          <span *ngIf="isSignedIn()" (click)="signOut()" class="dropdown-item">Out</span>
+        </div>
+      </div>
+    </nav>
+</div>

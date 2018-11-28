@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { AccountService } from 'app/account/services/account.service';
@@ -23,14 +25,15 @@ export class SignInComponent implements OnInit {
   });
 
   constructor(
+    private accountService: AccountService,
     private fb: FormBuilder,
-    private accountService: AccountService
+    private router: Router
   ) { }
 
   ngOnInit() {
   }
 
-  private onSubmit() : void {
+  private onSubmit(): void {
     if (this.signInForm.valid) {
       const signInModel = new SignInModel(
         this.signInForm.controls['Email'].value,
@@ -38,6 +41,7 @@ export class SignInComponent implements OnInit {
       );
       this.accountService.signIn(signInModel).subscribe(token => {
         sessionStorage.setItem('jwt', token.value);
+        this.router.navigate(['/']);
       }, error => {
         this.errorMessages = error.error;
       });

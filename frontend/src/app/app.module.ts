@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { JwtModule } from '@auth0/angular-jwt';
 
+import { CoreModule } from './core/core.module';
+
 import { AppRoutingModule } from './core/app-routing/app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ export function tokenGetter() {
     AppComponent
   ],
   imports: [
+    CoreModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
