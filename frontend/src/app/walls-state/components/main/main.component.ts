@@ -27,8 +27,7 @@ export class MainComponent implements OnInit {
         this.errorMessages = ['Walls are not fine'];
       }
     }, error => {
-      console.log(error);
-      this.errorMessages = error.error;
+      this.errorMessages = [error.error];
     });
   }
 }
