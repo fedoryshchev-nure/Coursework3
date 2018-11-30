@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Coursework.API.DTOs;
 using Coursework.API.Services.AuthenticationService;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coursework.API.Controllers
@@ -25,7 +27,7 @@ namespace Coursework.API.Controllers
         {
             try
             {
-                var token = await authenticationService.Authenticate(model, User.Claims);
+                var token = await authenticationService.Authenticate(model);
 
                 return token;
             }

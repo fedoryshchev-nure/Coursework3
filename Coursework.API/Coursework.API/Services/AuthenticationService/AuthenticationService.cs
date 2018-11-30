@@ -17,12 +17,14 @@ namespace Coursework.API.Services.AuthenticationService
     {
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
+        //private readonly RoleManager<IdentityRole> roleManager;
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
         public AuthenticationService(
             SignInManager<User> signInManager,
             UserManager<User> userManager,
+            //RoleManager<IdentityRole> roleManager,
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
@@ -30,16 +32,18 @@ namespace Coursework.API.Services.AuthenticationService
             this.userManager = userManager;
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            //this.roleManager = roleManager;
         }
 
-        public async Task<AuthenticationToken> Authenticate(LoginModel model, IEnumerable<Claim> claims)
+        public async Task<AuthenticationToken> Authenticate(LoginModel model)
         {
             var result = await signInManager
                 .PasswordSignInAsync(model.Email, model.Password, false, false);
 
             if (result.Succeeded)
             {
-                var token = BuildToken(claims);
+                var claim = new Claim(ClaimTypes.Email, model.Email);
+                var token = BuildToken(new List<Claim>() { claim });
 
                 return new AuthenticationToken { Value = token };
             }
@@ -74,23 +78,33 @@ namespace Coursework.API.Services.AuthenticationService
 
             if (result.Succeeded)
             {
-                AddAllClaimsToUserAsync(user);
-                AddAllRolesToUserAsync(user);
+                try
+                {
+                    await userManager.AddClaimAsync(user, 
+                        new Claim(ClaimTypes.Email, user.Email));
+                    await userManager.AddToRoleAsync(user, "User");
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
             else
+            {
+                await userManager.DeleteAsync(user);
                 throw new Exception("Registration failed");
+            }
         }
 
-        private async Task AddAllClaimsToUserAsync(User user)
-        {
-            await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
-        }
+        //private async Task CreateInitialRoles()
+        //{
+        //    var roleAdmin = new IdentityRole("Admin");
+        //    var roleUser = new IdentityRole("User");
+        //    var roleSensor = new IdentityRole("Sensor");
 
-        private async Task AddAllRolesToUserAsync(User user)
-        {
-            await userManager.AddToRoleAsync(user, "User");
-        }
-
-
+        //    await roleManager.CreateAsync(roleAdmin);
+        //    await roleManager.CreateAsync(roleUser);
+        //    await roleManager.CreateAsync(roleSensor);
+        //}
     }
 }
