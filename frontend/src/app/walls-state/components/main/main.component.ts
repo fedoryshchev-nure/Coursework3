@@ -22,8 +22,7 @@ export class MainComponent implements OnInit {
     this.stateService.getState().subscribe(state => {
       if (state) {
         this.successMessages = ['Walls are fine'];
-      }
-      else {
+      } else {
         this.errorMessages = ['Walls are not fine'];
       }
     }, error => {
