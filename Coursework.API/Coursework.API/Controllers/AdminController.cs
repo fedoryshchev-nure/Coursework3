@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Coursework.API.DTOs;
 using Coursework.API.Services.SensorService;
@@ -18,13 +19,29 @@ namespace Coursework.API.Controllers
             this.sensorService = sensorService;
         }
 
-        [HttpPost]
+        [HttpGet("{amount}")]
         [ActionName("sensor")]
-        public async Task<IActionResult> Sensor([FromBody]SensorDTO sensorDTO)
+        public async Task<ActionResult<IEnumerable<SensorDTO>>> Sensor(int amount)
         {
             try
             {
-                await sensorService.CreateAsync(sensorDTO);
+                var sensors = await sensorService.CreateAsync(amount);
+
+                return Ok(sensors);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost()]
+        [ActionName("attachToWall")]
+        public async Task<IActionResult> AttachToWall(SensorDTO sensorDTO)
+        {
+            try
+            {
+                await sensorService.AttachToWallAsync(sensorDTO);
 
                 return Ok();
             }
@@ -33,6 +50,5 @@ namespace Coursework.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
     }
 }

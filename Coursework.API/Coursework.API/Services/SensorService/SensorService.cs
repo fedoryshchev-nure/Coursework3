@@ -3,6 +3,8 @@ using Core.Models.Origin;
 using Coursework.API.DTOs;
 using Data.UnitOfWork;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Coursework.API.Services.SensorService
@@ -19,13 +21,26 @@ namespace Coursework.API.Services.SensorService
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task CreateAsync(SensorDTO sensorDTO)
+        public async Task AttachToWallAsync(SensorDTO sensorDTO)
         {
-            var sensor = mapper.Map<Sensor>(sensorDTO);
+            var sensor = await unitOfWork.Sensors.GetAsync(sensorDTO.Id);
 
-            await unitOfWork.Sensors.AddAsync(sensor);
+            sensor.WallId = sensorDTO.WallId;
 
             await unitOfWork.CompleteAsync();
+        }
+
+        public async Task<IEnumerable<SensorDTO>> CreateAsync(int amount)
+        {
+            var sensors = new List<Sensor>(amount);
+
+            await unitOfWork.Sensors.AddRangeAsync(sensors);
+
+            await unitOfWork.CompleteAsync();
+
+            var sensorDTOs = mapper.Map<IEnumerable<SensorDTO>>(sensors);
+
+            return await Task.FromResult(sensorDTOs);
         }
 
         public async Task PingAsync(SensorDTO sensorDTO)

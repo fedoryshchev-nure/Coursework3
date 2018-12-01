@@ -124,7 +124,8 @@ namespace Coursework.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("./swagger/v1/swagger.json", "My API V1");
-                // http://localhost:57660/swagger/v1/swagger.json
+                // http://localhost:57660/swagger/v1/swagger.json json
+                // http://localhost:57660/   UI
                 c.RoutePrefix = string.Empty;
             });
 
