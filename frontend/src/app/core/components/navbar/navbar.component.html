@@ -6,9 +6,14 @@
           <span>Sign&nbsp;</span>
         </button>
         <div class="dropdown-menu">
-          <span routerLink="/account/signin" *ngIf="!isSignedIn()" class="dropdown-item">In</span>
-          <span routerLink="/account/signup" *ngIf="!isSignedIn()" class="dropdown-item">Up</span>
-          <span *ngIf="isSignedIn()" (click)="signOut()" class="dropdown-item">Out</span>
+          <div *ngIf="!authService.isSignedIn()">
+            <span routerLink="/account/signin" class="dropdown-item">In</span>
+            <span routerLink="/account/signup" class="dropdown-item">Up</span>
+          </div>
+          <div *ngIf="authService.isSignedIn()">
+            <span *ngIf="authService.isAdmin()" class="dropdown-item">Admin</span>
+            <span (click)="authService.signOut()" class="dropdown-item">Out</span>
+          </div>
         </div>
       </div>
     </nav>

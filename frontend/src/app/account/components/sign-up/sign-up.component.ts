@@ -4,7 +4,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 
 import { ConfirmPassValdiator } from 'app/account/validators/confirm-pass-validator';
 
-import { AccountService } from 'app/account/services/account.service';
+import { AuthService } from 'app/core/services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
   });
 
   constructor(
-    private accountService: AccountService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private router: Router
   ) { }
@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit {
   onSubmit():
    void {
     if (this.signUpForm.valid) {
-      this.accountService.signUp(this.signUpForm.value).subscribe(x => {
+      this.authService.signUp(this.signUpForm.value).subscribe(x => {
         this.router.navigate(['/account/signin']);
       }, error => {
         this.errorMessages = error.error;

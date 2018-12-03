@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { AccountService } from 'app/account/services/account.service';
+import { AuthService } from 'app/core/services/auth.service';
 
-import { SignInModel } from 'app/account/models/sign-in-model';
+import { SignInModel } from 'app/shared/models/account/sign-in-model';
 
 @Component({
   selector: 'app-sign-in',
@@ -25,7 +25,7 @@ export class SignInComponent implements OnInit {
   });
 
   constructor(
-    private accountService: AccountService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private router: Router
   ) { }
@@ -39,7 +39,7 @@ export class SignInComponent implements OnInit {
         this.signInForm.controls['Email'].value,
         this.signInForm.controls['Password'].value
       );
-      this.accountService.signIn(signInModel).subscribe(token => {
+      this.authService.signIn(signInModel).subscribe(token => {
         sessionStorage.setItem('jwt', token.value);
         this.router.navigate(['/']);
       }, error => {

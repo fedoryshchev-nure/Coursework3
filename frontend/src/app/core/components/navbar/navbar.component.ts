@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from 'app/core/services/auth.service';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,16 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public authService: AuthService
+  ) { }
 
   ngOnInit() {
-  }
-
-  public isSignedIn(): boolean {
-    return !!sessionStorage.getItem('jwt');
-  }
-
-  public signOut(): void {
-    sessionStorage.removeItem('jwt');
   }
 }
