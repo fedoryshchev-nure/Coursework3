@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Coursework.API.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User")]
     [Route("[controller]")]
     public class StateController : Controller
     {

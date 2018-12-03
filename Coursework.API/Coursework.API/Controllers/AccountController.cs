@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Coursework.API.DTOs;
 using Coursework.API.Services.AuthenticationService;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coursework.API.Controllers
@@ -13,11 +12,11 @@ namespace Coursework.API.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly IAuthenticationService authenticationService;
+        private readonly IJwtAuthenticationService jwtAuthenticationService;
 
-        public AccountController(IAuthenticationService authenticationService)
+        public AccountController(IJwtAuthenticationService jwtAuthenticationService)
         {
-            this.authenticationService = authenticationService;
+            this.jwtAuthenticationService = jwtAuthenticationService;
         }
 
         [HttpPost]
@@ -27,7 +26,7 @@ namespace Coursework.API.Controllers
         {
             try
             {
-                var token = await authenticationService.Authenticate(model);
+                var token = await jwtAuthenticationService.Authenticate(model);
 
                 return token;
             }
@@ -44,7 +43,7 @@ namespace Coursework.API.Controllers
         {
             try
             {
-                await authenticationService.RegisterAsync(user);           
+                await jwtAuthenticationService.RegisterAsync(user);           
 
                 return Ok();
             }

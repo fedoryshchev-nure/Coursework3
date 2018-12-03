@@ -4,6 +4,7 @@ using Core.Models.Origin;
 using Coursework.API.Options;
 using Coursework.API.Services.AuthenticationService;
 using Coursework.API.Services.SensorService;
+using Coursework.API.Services.TokenBuilderService;
 using Data;
 using Data.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -89,7 +90,8 @@ namespace Coursework.API
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IJwtAuthenticationService, JwtAuthenticationService>();
+            services.AddScoped<ITokenBuilder, TokenBuilder>();
             services.AddScoped<ISensorService, SensorService>();
 
             services.AddScoped<IUserServiсe, UserServiсe>();
