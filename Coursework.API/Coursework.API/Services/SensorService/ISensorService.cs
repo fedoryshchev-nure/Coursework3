@@ -7,7 +7,7 @@ namespace Coursework.API.Services.SensorService
     public interface ISensorService
     {
         Task<IEnumerable<SensorDTO>> CreateAsync(int amount);
-        Task AttachToWallAsync(SensorDTO sensorDTO);
+        Task AttachWallToUser(UserWallDTO userWallDTO);
         Task PingAsync(SensorDTO sensorDTO);
     }
 }

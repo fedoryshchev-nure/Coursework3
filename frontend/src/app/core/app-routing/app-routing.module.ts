@@ -10,6 +10,10 @@ const routes: Routes = [
     path: "state",
     loadChildren: "app/walls-state/walls-state.module#WallsStateModule"
   },
+  {
+    path: "admin",
+    loadChildren: "app/admin/admin.module#AdminModule"
+  },
   { 
     path: '', 
     redirectTo: 'state', 

@@ -1,0 +1,49 @@
+<div class="container">
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-4 offset-4">
+      <form [formGroup]="amountForm" #amntFom="ngForm">
+          
+        <div class="form-group">
+          <label>Amount of sensors in wall:</label>
+          <input class="form-control" formControlName="Amount" required >
+        </div>
+
+        <div class="alert alert-danger" *ngIf="amntFom.submitted && this.amountForm.controls[amount].errors">
+          <div *ngIf="this.amountForm.controls[amount].errors.required">
+            Amount is required.
+          </div>
+          <div *ngIf="this.amountForm.controls[amount].errors.min">
+            Amount is too small.
+          </div>
+          <div *ngIf="this.amountForm.controls[amount].errors.max">
+            Amount is to big.
+          </div>
+        </div>
+
+        <button type="submit" (click)="onAmountFormSubmit()" class="btn btn-primary">Create wall</button>
+      </form>
+
+      <div *ngIf="sensorDTOs.length">
+        Wall id: {{sensorDTOs[0].wallId}}
+      </div>
+      <br>
+      <div class="row" *ngFor="let dto of sensorDTOs">
+        <div class="col">
+          Id: {{dto.id}}
+        </div >
+        <div class="col">
+          Pass: {{dto.password}}
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <app-success [successMessages]="successMessages">
+  </app-success>
+  <app-errors [errorMessages]="errorMessages">
+  </app-errors>
+</div>

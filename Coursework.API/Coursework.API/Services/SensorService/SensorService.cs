@@ -14,33 +14,49 @@ namespace Coursework.API.Services.SensorService
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
 
-        public SensorService(IMapper mapper,
-            IUnitOfWork unitOfWork)
+        public SensorService(
+            IMapper mapper,
+            IUnitOfWork unitOfWork
+            )
         {
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task AttachToWallAsync(SensorDTO sensorDTO)
+        public async Task AttachWallToUser(UserWallDTO userWallDTO)
         {
-            var sensor = await unitOfWork.Sensors.GetAsync(sensorDTO.Id);
+            var user = await unitOfWork.Users.GetByEmailAsync(userWallDTO.Email);
+            var wall = await unitOfWork.Walls.GetAsync(userWallDTO.WallId);
 
-            sensor.WallId = sensorDTO.WallId;
+            user.Walls.Append(wall); // Check if works properly
 
             await unitOfWork.CompleteAsync();
         }
 
         public async Task<IEnumerable<SensorDTO>> CreateAsync(int amount)
         {
-            var sensors = new List<Sensor>(amount);
+            var sensors = new List<Sensor>();
 
-            await unitOfWork.Sensors.AddRangeAsync(sensors);
+            var rnd = new Random();
+            for (int i = 0; i < amount; ++i)
+            {
+                sensors.Add(new Sensor()
+                {
+                    Password = rnd
+                        .Next(0, int.MaxValue)
+                        .ToString()
+                });
+            }
+
+            var wall = new Wall() { WallSensors = sensors };
+
+            await unitOfWork.Walls.AddAsync(wall);
 
             await unitOfWork.CompleteAsync();
 
             var sensorDTOs = mapper.Map<IEnumerable<SensorDTO>>(sensors);
 
-            return await Task.FromResult(sensorDTOs);
+            return await Task.FromResult(sensorDTOs); // Check if wallId autoattached
         }
 
         public async Task PingAsync(SensorDTO sensorDTO)

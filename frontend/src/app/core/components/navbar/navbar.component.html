@@ -11,7 +11,7 @@
             <span routerLink="/account/signup" class="dropdown-item">Up</span>
           </div>
           <div *ngIf="authService.isSignedIn()">
-            <span *ngIf="authService.isAdmin()" class="dropdown-item">Admin</span>
+            <span *ngIf="authService.isAdmin()" routerLink="/admin" class="dropdown-item">Admin</span>
             <span (click)="authService.signOut()" class="dropdown-item">Out</span>
           </div>
         </div>

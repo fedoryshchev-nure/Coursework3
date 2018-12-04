@@ -1,4 +1,5 @@
-﻿using Data.Repositories.Generic;
+﻿using Core.Models.Origin;
+using Data.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -8,6 +9,11 @@ namespace Data.Repositories.User
     {
         public UserRepository(ApplicationDBContext context) : base(context)
         {
+        }
+
+        public async Task<Core.Models.Origin.User> GetByEmailAsync(string email)
+        {
+            return await Set.FirstOrDefaultAsync(x => x.Email == email);
         }
 
         public async Task<Core.Models.Origin.User> GetWithWallsAndSensorsAsync(string email)

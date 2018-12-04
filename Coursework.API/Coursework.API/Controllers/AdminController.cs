@@ -20,8 +20,8 @@ namespace Coursework.API.Controllers
         }
 
         [HttpGet("{amount}")]
-        [ActionName("sensor")]
-        public async Task<ActionResult<IEnumerable<SensorDTO>>> Sensor(int amount)
+        [ActionName("createSensors")]
+        public async Task<ActionResult<IEnumerable<SensorDTO>>> CreateSensors(int amount)
         {
             try
             {
@@ -36,12 +36,12 @@ namespace Coursework.API.Controllers
         }
 
         [HttpPost()]
-        [ActionName("attachToWall")]
-        public async Task<IActionResult> AttachToWall(SensorDTO sensorDTO)
+        [ActionName("attachWallToUser")]
+        public async Task<IActionResult> AttachWallToUser(UserWallDTO userWallDTO)
         {
             try
             {
-                await sensorService.AttachToWallAsync(sensorDTO);
+                await sensorService.AttachWallToUser(userWallDTO);
 
                 return Ok();
             }
