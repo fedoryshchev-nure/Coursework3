@@ -1,0 +1,46 @@
+﻿{
+  "Not found": "Сторiнку не знайдено",
+
+  "Home": "Головна",
+  "English": "Англiйська",
+  "Ukrainian": "Українська",
+  "Sign": "Аккаунт",
+  "In": "Авторизацiя",
+  "Up": "Регiстрацiя",
+  "Admin": "Адмiнiстрування",
+  "Out": "Вийти",
+
+  "Email": "Електронна пошта",
+  "Email is required": "Введiть електронну пошту",
+  "Incorrect Email": "Неправильний формат пошти",
+  "Password": "Пароль",
+  "Password is required": "Введiть пароль",
+  "Password has to be at least 6 characters long": "Пароль повинен мiстити бiльше шести символiв",
+  "Submit": "Пiдтвердити",
+
+  "Error occured. Try later": "Помилка. Спробуйте пiзнiше",
+
+  "Confirm password": "Пiдтвердiть пароль",
+  "Confirm password has to be at least 6 characters long": "Пiдтвердження паролю повинно мiстити бiльше шести символiв",
+  "Confirm password doesn't match": "Паролi не спiвпадають",
+  "First name": "Ім'я",
+  "First name is required": "Введiть iм'я",
+  "Enter correct First name": "Введiть iм'я правильно",
+  "Last name": "Прiзвище",
+  "Last name is required": "Введiть прiзвище",
+  "Enter correct Last name": "Введiть прiзвище правильно",
+
+  "Amount of sensors in wall": "Кiлькiсть сенсорiв у стiнi",
+  "Amount is required": "Введiть кiлькiсть",
+  "Amount is too small": "Занадто мало",
+  "Amount is to big": "Занадто багато",
+  "Id": "Ідентифiкатор",
+  "User email": "Пошта користувача",
+  "Wall Id": "Ідентифiкатор стiни",
+  "Wall Id is required": "Введiть iдентифiкатор стiни",
+  "Attach wall to user": "Додати стiну до користувача",
+
+  "Get current wall state": "Отримати стан стiн",
+  "Walls are fine": "Усе гаразд",
+  "Walls are not fine": "Усе не гаразд"
+}

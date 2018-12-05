@@ -1,20 +1,31 @@
 <div class="container"> 
     <nav class="navbar navbar-dark bg-primary">
-      <a routerLink="/" class="navbar-brand">Navbar</a>
+      <a routerLink="/" class="navbar-brand">{{'Home' | translate}}</a>
       <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle btn-outline-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span>Sign&nbsp;</span>
-        </button>
-        <div class="dropdown-menu">
-          <div *ngIf="!authService.isSignedIn()">
-            <span routerLink="/account/signin" class="dropdown-item">In</span>
-            <span routerLink="/account/signup" class="dropdown-item">Up</span>
-          </div>
-          <div *ngIf="authService.isSignedIn()">
-            <span *ngIf="authService.isAdmin()" routerLink="/admin" class="dropdown-item">Admin</span>
-            <span (click)="authService.signOut()" class="dropdown-item">Out</span>
+        <div (click)="onButtonGroupClick($event)" class="btn-group">
+          <button (click)="translate.use('en')" class="btn btn-outline-success active" type="button">
+            {{'English' | translate}}
+          </button>
+          <button (click)="translate.use('ukr')" class="btn btn-outline-success" type="button">
+            {{'Ukrainian' | translate}}
+          </button>
+        </div>        
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle btn-outline-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span>{{'Sign' | translate}}&nbsp;</span>
+          </button>
+          <div class="dropdown-menu">
+            <div *ngIf="!authService.isSignedIn()">
+              <span routerLink="/account/signin" class="dropdown-item">{{'In' | translate}}</span>
+              <span routerLink="/account/signup" class="dropdown-item">{{'Up' | translate}}</span>
+            </div>
+            <div *ngIf="authService.isSignedIn()">
+              <span *ngIf="authService.isAdmin()" routerLink="/admin" class="dropdown-item">{{'Admin' | translate}}</span>
+              <span (click)="authService.signOut()" class="dropdown-item">{{'Out' | translate}}</span>
+            </div>
           </div>
         </div>
       </div>
+
     </nav>
 </div>

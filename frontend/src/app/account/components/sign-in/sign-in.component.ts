@@ -16,8 +16,7 @@ export class SignInComponent implements OnInit {
   email = 'Email';
   password = 'Password';
 
-  errorMessages: string[] = [];
-  warningMessages: string[] = [];
+  errorOccurd = false;
 
   signInForm = this.fb.group({
     Email: ['', [Validators.required, Validators.email]],
@@ -43,7 +42,7 @@ export class SignInComponent implements OnInit {
         sessionStorage.setItem('jwt', token.value);
         this.router.navigate(['/']);
       }, error => {
-        this.errorMessages = error.error;
+        this.errorOccurd = true;
       });
     }
   }

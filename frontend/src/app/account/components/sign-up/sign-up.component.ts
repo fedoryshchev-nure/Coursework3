@@ -18,7 +18,7 @@ export class SignUpComponent implements OnInit {
   firstName = 'FirstName';
   lastName = 'LastName';
 
-  errorMessages: string[] = [];
+  errorOccurd = false;
 
   signUpForm = this.fb.group({
     FirstName: ['', [
@@ -50,7 +50,7 @@ export class SignUpComponent implements OnInit {
       this.authService.signUp(this.signUpForm.value).subscribe(x => {
         this.router.navigate(['/account/signin']);
       }, error => {
-        this.errorMessages = error.error;
+        this.errorOccurd = true;
       });
     }
   }

@@ -6,18 +6,18 @@
       <form [formGroup]="amountForm" #amntFom="ngForm">
           
         <div class="form-group">
-          <label>Amount of sensors in wall:</label>
+          <label>{{'Amount of sensors in wall' | translate}}:</label>
           <input class="form-control" formControlName="Amount" required >
         </div>
         <div class="alert alert-danger" *ngIf="amntFom.submitted && this.amountForm.controls[amount].errors">
           <div *ngIf="this.amountForm.controls[amount].errors.required">
-            Amount is required.
+            {{'Amount is required' | translate}}.
           </div>
           <div *ngIf="this.amountForm.controls[amount].errors.min">
-            Amount is too small.
+            {{'Amount is too small' | translate}}.
           </div>
           <div *ngIf="this.amountForm.controls[amount].errors.max">
-            Amount is to big.
+            {{'Amount is to big' | translate}}.
           </div>
         </div>
 
@@ -25,14 +25,14 @@
       </form>
 
       <div *ngIf="sensorDTOs.length">
-        Wall id: {{sensorDTOs[0].wallId}}
+        {{'Wall Id' | translate}}: {{sensorDTOs[0].wallId}}
         <br>
         <div class="row" *ngFor="let dto of sensorDTOs">
           <div class="col">
-            Id: {{dto.id}}
+            {{'Id' | translate}}: {{dto.id}}
           </div >
           <div class="col">
-            Pass: {{dto.password}}
+            {{'Passsword' | translate}}: {{dto.password}}
           </div>
           <br>
         </div>
@@ -41,33 +41,33 @@
       <form [formGroup]="wallToUserForm" #wallUserForm="ngForm">
           
         <div class="form-group">
-          <label>User email:</label>
+          <label>{{'User email' | translate}}:</label>
           <input class="form-control" formControlName="Email" required >
         </div>
         <div class="alert alert-danger" *ngIf="wallUserForm.submitted && this.wallToUserForm.controls[email].errors">
           <div *ngIf="this.wallToUserForm.controls[email].errors.required">
-            Email is required.
+            {{'Email is required' | translate}}.
           </div>
         </div>
 
         <div class="form-group">
-          <label>Wall Id:</label>
+          <label>{{'Wall Id' | translate}}:</label>
           <input class="form-control" formControlName="WallId" required >
         </div>
         <div class="alert alert-danger" *ngIf="wallUserForm.submitted && this.wallToUserForm.controls[wallId].errors">
           <div *ngIf="this.wallToUserForm.controls[wallId].errors.required">
-            Wall Id is required.
+            {{'Wall Id is required' | translate}}.
           </div>
         </div>
   
-        <button type="submit" (click)="onWallToUserFormSubmit()" class="btn btn-primary">Attach wall to user</button>
+        <button type="submit" (click)="onWallToUserFormSubmit()" class="btn btn-primary">{{'Attach wall to user' | translate}}</button>
       </form>
     </div>
   </div>
   <br>
   <br>
-  <app-success [successMessages]="successMessages">
-  </app-success>
-  <app-errors [errorMessages]="errorMessages">
-  </app-errors>
+  <div *ngIf="errorOccurd" class="col-md-4 offset-4">
+    <app-errors [errorMessages]="['Error occured. Try later' | translate]">
+    </app-errors>
+  </div>
 </div>

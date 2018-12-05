@@ -8,8 +8,10 @@ import { StateService } from 'app/walls-state/services/state.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  successMessages: string[] = [];
-  errorMessages: string[] = [];
+  wallsFine = false;
+  wallsNotFine = false;
+
+  errorOccurd = false;
 
   constructor(
     private stateService: StateService
@@ -21,12 +23,14 @@ export class MainComponent implements OnInit {
   getState(): void {
     this.stateService.getState().subscribe(state => {
       if (state) {
-        this.successMessages = ['Walls are fine'];
+        this.wallsFine = true;
+        this.wallsNotFine = false;
       } else {
-        this.errorMessages = ['Walls are not fine'];
+        this.wallsFine = false;
+        this.wallsNotFine = true;
       }
     }, error => {
-      this.errorMessages = [error.error];
+      this.errorOccurd = true;
     });
   }
 }

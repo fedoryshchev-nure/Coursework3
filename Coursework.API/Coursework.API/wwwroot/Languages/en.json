@@ -1,0 +1,47 @@
+{
+  "Not found": "Not found",
+
+  "Home": "Home",
+  "English": "English",
+  "Ukrainian": "Ukrainian",
+  "Sign": "Sign",
+  "In": "In",
+  "Up": "Up",
+  "Admin": "Admin",
+  "Out": "Out",
+
+  "Email": "Email",
+  "Email is required": "Email is required",
+  "Incorrect Email": "Incorrect Email",
+  "Password": "Password",
+  "Password is required": "Password is required",
+  "Password has to be at least 6 characters long": "Password must be at least 6 characters long",
+  "Submit": "Submit",
+
+  "Error occured. Try later": "Error occured. Try later",
+
+  "Confirm password": "Confirm password",
+  "Confirm password has to be at least 6 characters long": "Confirm password has to be at least 6 characters long",
+  "Confirm password doesn't match": "Confirm password doesn't match",
+  "First name": "First name",
+  "First name is required": "First name is required",
+  "Enter correct First name": "Enter correct First name",
+  "Last name": "Last name",
+  "Last name is required": "Last name is required",
+  "Enter correct Last name": "Enter correct Last name",
+
+  "Amount of sensors in wall": "Amount of sensors in wall",
+  "Amount is required": "Amount is required",
+  "Amount is too small": "Amount is too small",
+  "Amount is to big": "Amount is to big",
+  "Wall id": "Wall id",
+  "Id": "Id",
+  "User email": "User email",
+  "Wall Id": "Wall Id",
+  "Wall Id is required": "Wall Id is required",
+  "Attach wall to user": "Attach wall to user",
+
+  "Get current wall state": "Get current wall state",
+  "Walls are fine": "Walls are fine",
+  "Walls are not fine": "Walls are not fine"
+}

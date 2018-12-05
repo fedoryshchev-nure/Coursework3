@@ -16,10 +16,9 @@ export class AdminComponent implements OnInit {
   email = "Email";
   wallId = "WallId";
 
-  successMessages: string[] = [];
-  errorMessages: string[] = [];
-
   sensorDTOs: SensorDTO[] = [];
+
+  errorOccurd = false;
 
   amountForm = this.fb.group({
     Amount: ['', [
@@ -49,7 +48,7 @@ export class AdminComponent implements OnInit {
           console.log(dtos);
           this.sensorDTOs = dtos;
         }, error => {
-          this.errorMessages = [error.message];
+          this.errorOccurd = true;
         });
     }
   }
@@ -63,7 +62,7 @@ export class AdminComponent implements OnInit {
         ).subscribe(x => {
           //Empty return on success
       }, error => {
-        this.errorMessages = [error.message];
+        this.errorOccurd = true;
       });
     }
   }

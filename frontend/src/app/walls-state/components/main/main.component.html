@@ -3,15 +3,19 @@
   <br>
   <div class="row">
     <div class="col offset-4">
-      <button type="submit" (click)="getState()" class="btn btn-primary">Get current wall state</button>
+      <button type="submit" (click)="getState()" class="btn btn-primary">{{'Get current wall state' | translate}}</button>
     </div>
   </div>
   <br>
   <br>
-  <app-success [successMessages]="successMessages">
+  <app-success *ngIf="wallsFine" [successMessages]="['Walls are fine' | translate]">
   </app-success>
-  <app-errors [errorMessages]="errorMessages">
+  <app-errors *ngIf="wallsNotFine" [errorMessages]="['Walls are not fine' | translate]">
   </app-errors>
+  <div *ngIf="errorOccurd">
+    <app-errors [errorMessages]="['Error occured. Try later' | translate]">
+    </app-errors>
+  </div>
 </div>
 
 
