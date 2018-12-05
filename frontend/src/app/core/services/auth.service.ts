@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import * as jwtDecode from 'jwt-decode';
@@ -20,7 +21,8 @@ const headers = new HttpHeaders({
 export class AuthService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   public signUp(signUpModel: SignUpModel): Observable<any> {
@@ -57,5 +59,6 @@ export class AuthService {
 
   public signOut(): void {
     sessionStorage.removeItem('jwt');
+    this.router.navigate(['/']);
   }
 }

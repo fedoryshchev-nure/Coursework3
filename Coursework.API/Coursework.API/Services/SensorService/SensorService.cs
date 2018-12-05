@@ -4,7 +4,6 @@ using Coursework.API.DTOs;
 using Data.UnitOfWork;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Coursework.API.Services.SensorService
@@ -27,8 +26,8 @@ namespace Coursework.API.Services.SensorService
         {
             var user = await unitOfWork.Users.GetByEmailAsync(userWallDTO.Email);
             var wall = await unitOfWork.Walls.GetAsync(userWallDTO.WallId);
-
-            user.Walls.Append(wall); // Check if works properly
+            
+            wall.UserId = user.Id;
 
             await unitOfWork.CompleteAsync();
         }
@@ -56,7 +55,7 @@ namespace Coursework.API.Services.SensorService
 
             var sensorDTOs = mapper.Map<IEnumerable<SensorDTO>>(sensors);
 
-            return await Task.FromResult(sensorDTOs); // Check if wallId autoattached
+            return await Task.FromResult(sensorDTOs);
         }
 
         public async Task PingAsync(SensorDTO sensorDTO)

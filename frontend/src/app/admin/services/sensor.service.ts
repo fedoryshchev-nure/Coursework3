@@ -28,6 +28,7 @@ export class SensorService {
   }
 
   public attachWallToUser(userWallDTO: UserWallDTO): Observable<any> {
+    console.log(userWallDTO);
     return this.http.post(
       `${environment.apiLink}/admin/attachWallToUser`,
       userWallDTO,

@@ -35,9 +35,9 @@ namespace Coursework.API.Controllers
             }
         }
 
-        [HttpPost()]
+        [HttpPost]
         [ActionName("attachWallToUser")]
-        public async Task<IActionResult> AttachWallToUser(UserWallDTO userWallDTO)
+        public async Task<IActionResult> AttachWallToUser([FromBody]UserWallDTO userWallDTO)
         {
             try
             {

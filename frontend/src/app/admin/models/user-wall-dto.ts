@@ -1,6 +1,6 @@
 export class UserWallDTO {
     constructor (
-        public userId: string,
+        public email: string,
         public wallId: string
     ) {}
 }

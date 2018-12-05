@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SensorService } from 'app/admin/services/sensor.service';
 
 import { SensorDTO } from 'app/admin/models/sensor-dto';
+import { UserWallDTO } from 'app/admin/models/user-wall-dto';
 
 @Component({
   selector: 'app-admin',
@@ -12,6 +13,8 @@ import { SensorDTO } from 'app/admin/models/sensor-dto';
 })
 export class AdminComponent implements OnInit {
   amount = 'Amount';
+  email = "Email";
+  wallId = "WallId";
 
   successMessages: string[] = [];
   errorMessages: string[] = [];
@@ -26,6 +29,11 @@ export class AdminComponent implements OnInit {
     ]]
   });
 
+  wallToUserForm = this.fb.group({
+    Email: ['', Validators.required],
+    WallId: ['', Validators.required] 
+  });
+
   constructor(
     private fb: FormBuilder,
     private sensorService: SensorService
@@ -34,7 +42,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
-  private onAmountFormSubmit(): void {
+  public onAmountFormSubmit(): void {
     if (this.amountForm.valid) {
       this.sensorService.createSensors(
         this.amountForm.controls[this.amount].value).subscribe(dtos => {
@@ -43,6 +51,20 @@ export class AdminComponent implements OnInit {
         }, error => {
           this.errorMessages = [error.message];
         });
+    }
+  }
+
+  public onWallToUserFormSubmit(): void {
+    if (this.wallToUserForm.valid){
+      this.sensorService.attachWallToUser(
+        new UserWallDTO(
+          this.wallToUserForm.controls[this.email].value,
+          this.wallToUserForm.controls[this.wallId].value)
+        ).subscribe(x => {
+          //Empty return on success
+      }, error => {
+        this.errorMessages = [error.message];
+      });
     }
   }
 

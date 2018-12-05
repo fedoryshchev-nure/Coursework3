@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 
+import { NotFoundComponent } from 'app/shared/not-found/not-found.component';
+
 const routes: Routes = [
   {
     path: "account",
@@ -21,8 +23,8 @@ const routes: Routes = [
   },
   { 
     path: '**', 
-    redirectTo: 'state', 
-    pathMatch: 'full' 
+    pathMatch: 'full',
+    component: NotFoundComponent
   },
 ];
 
