@@ -1,6 +1,11 @@
 <div class="container"> 
     <nav class="navbar navbar-dark bg-primary">
-      <a routerLink="/" class="navbar-brand">{{'Home' | translate}}</a>
+      <div class="navbar-brand">
+        <a routerLink="/" class="navbar-brand">{{'Home' | translate}}</a>
+        <a routerLink="state/data" class="navbar-brand">{{'My walls' | translate}}</a>
+        <a routerLink="state/statistics" class="navbar-brand">{{'Statistics' | translate}}</a>
+        <a routerLink="state/automatization" class="navbar-brand">{{'Automatization' | translate}}</a>
+      </div>
       <div class="btn-group">
         <div (click)="onButtonGroupClick($event)" class="btn-group">
           <button (click)="translate.use('en')" class="btn btn-outline-success active" type="button">

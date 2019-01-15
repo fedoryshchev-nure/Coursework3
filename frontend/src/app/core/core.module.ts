@@ -37,7 +37,7 @@ export function httpLoaderFactory(http: HttpClient) {
         tokenGetter: tokenGetter,
         whitelistedDomains: ['localhost:57660']
       }
-    }) 
+    })
   ],
   exports: [
     NavbarComponent

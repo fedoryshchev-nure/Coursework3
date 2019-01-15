@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
 
 import { SensorDTO } from '../models/sensor-dto';
 import { UserWallDTO } from '../models/user-wall-dto';
+import { MaterialDTO } from 'app/walls-state/dtos/material-dto';
 
 const headers = new HttpHeaders({
   'Content-Type': 'application/json; charset=utf-8',
@@ -33,6 +34,14 @@ export class SensorService {
       `${environment.apiLink}/admin/attachWallToUser`,
       userWallDTO,
       { headers: headers }
+    );
+  }
+
+  public createMaterial(materialDTO: MaterialDTO) {
+    return this.http.post(
+      `${environment.apiLink}/admin/CreateMaterial`,
+      materialDTO,
+      { headers }
     );
   }
 }
