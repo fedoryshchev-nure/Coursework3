@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using Core.Entities.CrossTable;
+using Core.Entities.Origin;
 using Core.Models.Origin;
 using Coursework.API.DTOs;
 using Data.UnitOfWork;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Coursework.API.Services.SensorService
@@ -32,14 +35,14 @@ namespace Coursework.API.Services.SensorService
             await unitOfWork.CompleteAsync();
         }
 
-        public async Task<IEnumerable<SensorDTO>> CreateAsync(int amount)
+        public async Task<IEnumerable<SensorDTO>> CreateAsync(CreateWallDTO dto)
         {
-            var sensors = new List<Sensor>();
+            var sensorDTOs = new List<SensorDTO>();
 
             var rnd = new Random();
-            for (int i = 0; i < amount; ++i)
+            for (int i = 0; i < dto.SensorCount; ++i)
             {
-                sensors.Add(new Sensor()
+                sensorDTOs.Add(new SensorDTO()
                 {
                     Password = rnd
                         .Next(0, int.MaxValue)
@@ -47,15 +50,42 @@ namespace Coursework.API.Services.SensorService
                 });
             }
 
-            var wall = new Wall() { WallSensors = sensors };
+            var wall = new Wall()
+            {
+                WallSensors = mapper.Map<IEnumerable<Sensor>>(sensorDTOs)
+            };
 
             await unitOfWork.Walls.AddAsync(wall);
 
+            wall.Materials = mapper
+                .Map<IEnumerable<Material>>(dto.Materials)
+                .Select(x => new WallMaterial() { MaterialId = x.Id, WallId = wall.Id });
+
             await unitOfWork.CompleteAsync();
 
-            var sensorDTOs = mapper.Map<IEnumerable<SensorDTO>>(sensors);
-
             return await Task.FromResult(sensorDTOs);
+        }
+
+        public async Task<IEnumerable<WallDTO>> 
+            GetWallsWithSensorsAndMaterialsForUser(string email)
+        {
+            var userWithWallAndSensors = await unitOfWork
+                .Users
+                .GetWithWallsAndSensorsAsync(email);
+            var result = new List<WallDTO>();
+
+            foreach(var wall in userWithWallAndSensors.Walls)
+            {
+                result.Add(
+                    new WallDTO()
+                    {
+                        Id = wall.Id,
+                        WallSensors = mapper.Map<IEnumerable<SensorDTO>>(wall.WallSensors),
+                        Materials = mapper.Map<IEnumerable<MaterialDTO>>(wall.Materials)
+                    });
+            }
+
+            return result;
         }
 
         public async Task PingAsync(SensorDTO sensorDTO)
@@ -78,7 +108,7 @@ namespace Coursework.API.Services.SensorService
 
             return (await unitOfWork.Sensors
                 .GetAsync(sensorDTO.Id))?
-                .Password == sensorDTO.Password;
+                .PasswordHash == (int.Parse(sensorDTO.Password) % 13).ToString();
 
         }
     }

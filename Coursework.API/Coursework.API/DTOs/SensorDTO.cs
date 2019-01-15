@@ -5,6 +5,7 @@
         public string Id { get; set; }
         public string Password { get; set; }
         public bool IsBroken { get; set; }
+        public double DamageInPercents { get; set; }
         public string WallId { get; set; }
     }
 }

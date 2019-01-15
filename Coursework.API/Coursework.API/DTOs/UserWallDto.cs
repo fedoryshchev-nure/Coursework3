@@ -1,4 +1,6 @@
-﻿namespace Coursework.API.DTOs
+﻿using System.Collections.Generic;
+
+namespace Coursework.API.DTOs
 {
     public class UserWallDTO
     {

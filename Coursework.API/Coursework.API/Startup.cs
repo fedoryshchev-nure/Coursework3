@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using BusinessLogic.Services.AutomatizationSerivce;
+using BusinessLogic.Services.StatisticService;
 using BusinessLogic.Services.UserService;
 using Core.Models.Origin;
 using Coursework.API.Options;
 using Coursework.API.Services.AuthenticationService;
+using Coursework.API.Services.MaterialService;
 using Coursework.API.Services.SensorService;
 using Coursework.API.Services.TokenBuilderService;
 using Data;
@@ -94,9 +97,13 @@ namespace Coursework.API
 
             services.AddScoped<IJwtAuthenticationService, JwtAuthenticationService>();
             services.AddScoped<ITokenBuilder, TokenBuilder>();
+
             services.AddScoped<ISensorService, SensorService>();
+            services.AddScoped<IMaterialService, MaterialService>();
 
             services.AddScoped<IUserServiсe, UserServiсe>();
+            services.AddScoped<IStatisticService, StatisticService>();
+            services.AddScoped<IAutomatizationService, AutomatizationService>();
 
             services.AddSwaggerGen(c =>
             {

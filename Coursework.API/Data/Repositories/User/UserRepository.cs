@@ -1,6 +1,6 @@
-﻿using Core.Models.Origin;
-using Data.Repositories.Generic;
+﻿using Data.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Data.Repositories.User
@@ -22,6 +22,13 @@ namespace Data.Repositories.User
                 .Include(x => x.Walls)
                     .ThenInclude(x => x.WallSensors)
                 .FirstOrDefaultAsync(x => x.Email == email);
+        }
+
+        public IEnumerable<Core.Models.Origin.User> GetAllWithWallsAndSensors()
+        {
+            return Set
+                .Include(x => x.Walls)
+                    .ThenInclude(x => x.WallSensors);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Data.Repositories.Sensor;
+﻿using Data.Repositories.Material;
+using Data.Repositories.Sensor;
 using Data.Repositories.User;
 using Data.Repositories.Wall;
 using System;
@@ -11,6 +12,7 @@ namespace Data.UnitOfWork
         IUserRepository Users { get; set; }
         IWallRepository Walls { get; set; }
         ISensorRepository Sensors { get; set; }
+        IMaterialRepository Materials { get; set; }
 
         Task CompleteAsync();
     }
