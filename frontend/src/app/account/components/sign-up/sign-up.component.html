@@ -75,7 +75,18 @@
       <div *ngIf="this.signUpForm.controls[lastName].errors.pattern">
         {{'Enter correct Last name' | translate}}.
       </div>
-    </div>      
+    </div>
+    
+    <div class="form-group">
+      <label>{{'Country' | translate}}:</label>
+      <input type="text" class="form-control" formControlName="Country" required>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="sgUpForm.submitted && this.signUpForm.controls[country].errors">
+      <div *ngIf="this.signUpForm.controls[country].errors.required">
+        {{'Country is required' | translate}}.
+      </div>
+    </div>
 
     <button type="submit" (click)="onSubmit()" class="btn btn-primary ml-2">{{'Submit' | translate}}</button>  
   </form>

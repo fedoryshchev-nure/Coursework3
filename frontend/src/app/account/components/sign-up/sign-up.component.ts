@@ -17,6 +17,7 @@ export class SignUpComponent implements OnInit {
   confirmPassword = 'ConfirmPassword';
   firstName = 'FirstName';
   lastName = 'LastName';
+  country = 'Country';
 
   errorOccurd = false;
 
@@ -30,7 +31,8 @@ export class SignUpComponent implements OnInit {
     ]],
     Email: ['', [Validators.required, Validators.email]],
     Password: ['', [Validators.required, Validators.minLength(6)]],
-    ConfirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+    ConfirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+    Country: ['', [Validators.required]]
   });
 
   constructor(

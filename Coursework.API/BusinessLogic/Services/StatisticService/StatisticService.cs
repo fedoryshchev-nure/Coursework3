@@ -18,13 +18,17 @@ namespace BusinessLogic.Services.StatisticService
             var users = unitOfWork
                 .Users
                 .GetAllWithWallsAndSensors();
-            var orderedRegions = users
+            var usersGroupedByRegions = users
                 .GroupBy(x => x.Country)
+                .Where(x => !string.IsNullOrEmpty(x.Key)).ToList();
+            var orderedRegions = usersGroupedByRegions
                 .OrderByDescending(x => x
                     .Average(k => k.Walls
-                        .Average(y => y
-                            .WallSensors
-                            .Average(z => z.DamageInPercents))))
+                        .DefaultIfEmpty()
+                        ?.Average(y => y
+                            ?.WallSensors
+                            ?.DefaultIfEmpty()
+                            ?.Average(z => z?.DamageInPercents))))
                 .Select(x => x.Key);
 
             return orderedRegions;
@@ -36,13 +40,12 @@ namespace BusinessLogic.Services.StatisticService
                 .Walls
                 .GetAllWallsWithSensorsAndMaterials();
             var orderedMaterials = walls
-                .GroupBy(x => x.Materials
-                    .Select(y => y.Material.Name))
+                .GroupBy(x => x.Material.Name)
                 .OrderByDescending(x => x
                         .Average(y => y
                             .WallSensors
                             .Average(z => z.DamageInPercents)))
-                .SelectMany(x => x.Key);
+                .Select(x => x.Key);
 
             return orderedMaterials;
         }

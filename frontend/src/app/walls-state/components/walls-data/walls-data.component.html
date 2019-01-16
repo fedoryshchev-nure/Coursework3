@@ -1,3 +1,37 @@
-<p>
-  walls-data works!
-</p>
+<div class="container">
+  <br>
+  <br>
+  <div class="col">
+    <button (click)="onShowBrokenClick()" class="btn btn-primary">Show state of sensors in walls</button>
+    &nbsp; &nbsp;
+    <button (click)="onShowMaterialClick()" class="btn btn-primary">Show material of wall</button>
+  </div>
+  <br>
+  <br>
+  <div class="col" *ngFor="let dto of wallDTOs$ | async">
+    Wall Id: {{dto.id}}
+    <div *ngIf="showMaterial">
+      Material of wall: {{dto.material.name}}
+    </div>
+    <div *ngIf="showBroken">
+      <br>
+      <br>
+      <div  class="col" *ngFor="let sensor of dto.wallSensors; if ">
+        <div class="row">
+          Sensors Id: {{sensor.id}}
+        </div>
+        <div *>
+          <div class="row">
+            Is broken: {{sensor.isBroken}}
+          </div>
+          <div class="row">
+            Damage: {{sensor.damageInPercents}}
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+  </div>
+</div>

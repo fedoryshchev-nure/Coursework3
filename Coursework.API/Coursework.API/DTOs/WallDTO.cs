@@ -8,6 +8,6 @@ namespace Coursework.API.DTOs
 
         public virtual IEnumerable<SensorDTO> WallSensors { get; set; }
 
-        public IEnumerable<MaterialDTO> Materials { get; set; }
+        public MaterialDTO Material { get; set; }
     }
 }

@@ -13,8 +13,7 @@ namespace Data.Repositories.Wall
         public IEnumerable<Core.Models.Origin.Wall> GetAllWallsWithSensorsAndMaterials()
         {
             return Set
-                .Include(x => x.Materials)
-                    .ThenInclude(x => x.Material)
+                .Include(x => x.Material)
                 .Include(x => x.WallSensors);
         }
     }

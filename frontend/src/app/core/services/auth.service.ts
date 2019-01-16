@@ -57,6 +57,18 @@ export class AuthService {
     return res;
   }
 
+  public isUser(): boolean {
+    let res = false;
+
+    if (this.isSignedIn()) {
+      res = (jwtDecode(sessionStorage.getItem('jwt'))
+        ['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] ==
+          "User");
+    }
+
+    return res;
+  }
+
   public signOut(): void {
     sessionStorage.removeItem('jwt');
     this.router.navigate(['/']);

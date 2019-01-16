@@ -21,6 +21,8 @@ namespace Data.Repositories.User
             return await Set
                 .Include(x => x.Walls)
                     .ThenInclude(x => x.WallSensors)
+                .Include(x => x.Walls)
+                    .ThenInclude(x => x.Material)
                 .FirstOrDefaultAsync(x => x.Email == email);
         }
 

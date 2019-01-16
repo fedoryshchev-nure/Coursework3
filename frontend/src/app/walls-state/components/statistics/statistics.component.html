@@ -1,3 +1,29 @@
-<p>
-  statistics works!
-</p>
+<div class="container">
+  <br>
+  <div class="col">
+    <button (click)="onRegionsClick()" class="btn btn-primary">Show statistic about regions</button>
+    &nbsp; &nbsp;
+    <button (click)="onMaterialsClick()" class="btn btn-primary">Show statistic about materials</button>
+  </div>
+<br>
+<br>
+  <div class="col">
+    <div *ngIf="regions">
+      Regions with most damaged walls:
+      <br>
+      <div *ngFor="let dto of regions$ | async; let i = index">
+        {{i + 1}}. Country: {{dto}}
+      </div>
+    </div>
+    
+    <div *ngIf="materials"> 
+      Worst materials:
+      <br>
+      <div *ngFor="let dto of materials$ | async; let i = index">
+        {{i + 1}}. Material: {{dto}}
+      </div>
+    </div>
+  </div>
+
+
+</div>

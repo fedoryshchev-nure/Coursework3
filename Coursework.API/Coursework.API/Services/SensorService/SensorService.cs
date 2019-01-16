@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Core.Entities.CrossTable;
-using Core.Entities.Origin;
 using Core.Models.Origin;
 using Coursework.API.DTOs;
 using Data.UnitOfWork;
@@ -52,14 +50,17 @@ namespace Coursework.API.Services.SensorService
 
             var wall = new Wall()
             {
-                WallSensors = mapper.Map<IEnumerable<Sensor>>(sensorDTOs)
+                WallSensors = mapper.Map<IEnumerable<Sensor>>(sensorDTOs),
+                MaterialId = dto.Material.Id
             };
 
             await unitOfWork.Walls.AddAsync(wall);
 
-            wall.Materials = mapper
-                .Map<IEnumerable<Material>>(dto.Materials)
-                .Select(x => new WallMaterial() { MaterialId = x.Id, WallId = wall.Id });
+            for (int i = 0; i < wall.WallSensors.Count(); ++i)
+            {
+                sensorDTOs[i].WallId = wall.WallSensors.ElementAt(i).WallId;
+                sensorDTOs[i].Id = wall.WallSensors.ElementAt(i).Id;
+            }
 
             await unitOfWork.CompleteAsync();
 
@@ -81,7 +82,7 @@ namespace Coursework.API.Services.SensorService
                     {
                         Id = wall.Id,
                         WallSensors = mapper.Map<IEnumerable<SensorDTO>>(wall.WallSensors),
-                        Materials = mapper.Map<IEnumerable<MaterialDTO>>(wall.Materials)
+                        Material = mapper.Map<MaterialDTO>(wall.Material)
                     });
             }
 
@@ -94,7 +95,8 @@ namespace Coursework.API.Services.SensorService
             {
                 Sensor sensor = await unitOfWork.Sensors.GetAsync(sensorDTO.Id);
 
-                sensor.IsBroken = sensorDTO.IsBroken;
+                sensor.IsBroken = sensorDTO.DamageInPercents > 0.5;
+                sensor.DamageInPercents = sensorDTO.DamageInPercents;
 
                 await unitOfWork.CompleteAsync();
             }

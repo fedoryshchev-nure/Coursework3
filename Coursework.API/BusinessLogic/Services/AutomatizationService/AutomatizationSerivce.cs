@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Services.StatisticService;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic.Services.AutomatizationSerivce
 {
@@ -16,14 +17,16 @@ namespace BusinessLogic.Services.AutomatizationSerivce
         {
             return statisticService
                 .GetMostDamagedMaterials()
-                .TakeLast(3);
+                .TakeLast(3)
+                .Reverse();
         }
 
         public IEnumerable<string> GetBestRegions()
         {
             return statisticService
                 .GetRegionsOrderedByWallDamage()
-                .TakeLast(3);
+                .TakeLast(3)
+                .Reverse();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Core.Entities.Origin;
 using Coursework.API.DTOs;
@@ -26,6 +27,16 @@ namespace Coursework.API.Services.MaterialService
             await unitOfWork.Materials.AddAsync(material);
 
             await unitOfWork.CompleteAsync();
+        }
+
+        public IEnumerable<MaterialDTO> GetAll()
+        {
+            var materials = unitOfWork
+                .Materials
+                .GetAll()
+                .Result;
+
+            return mapper.Map<IEnumerable<MaterialDTO>>(materials);
         }
     }
 }

@@ -71,5 +71,20 @@ namespace Coursework.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<MaterialDTO>> GetMaterials()
+        {
+            try
+            {
+                var materials = materialService.GetAll();
+
+                return Ok(materials);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

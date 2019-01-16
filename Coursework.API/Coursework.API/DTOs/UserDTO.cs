@@ -17,5 +17,7 @@ namespace Coursework.API.DTOs
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+
+        public string Country { get; set; }
     }
 }

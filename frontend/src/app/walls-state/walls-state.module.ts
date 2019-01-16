@@ -9,18 +9,23 @@ import { MainComponent } from './components/main/main.component';
 import { WallsDataComponent } from './components/walls-data/walls-data.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { AutomatComponent } from './components/automat/automat.component';
+import { IotComponent } from './components/iot/iot.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     MainComponent,
     WallsDataComponent,
     StatisticsComponent,
-    AutomatComponent
+    AutomatComponent,
+    IotComponent
   ],
   imports: [
     WallsStateRoutingModule,
     SharedModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class WallsStateModule { }

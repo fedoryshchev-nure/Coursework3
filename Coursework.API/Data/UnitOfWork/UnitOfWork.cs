@@ -21,6 +21,7 @@ namespace Data.UnitOfWork
             Users = new UserRepository(context);
             Walls = new WallRepository(context);
             Sensors = new SensorRepository(context);
+            Materials = new MaterialRepository(context);
         }
 
         public async Task CompleteAsync()

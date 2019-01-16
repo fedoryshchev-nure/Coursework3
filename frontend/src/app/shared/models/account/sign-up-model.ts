@@ -4,6 +4,7 @@ export class SignUpModel {
         public Password : string, 
         public ConfirmPassword : string,
         public FirstName : string,
-        public LastName : string
+        public LastName : string,
+        public Country: string
     ) {}
 }

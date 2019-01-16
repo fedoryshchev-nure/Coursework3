@@ -5,6 +5,6 @@ export class WallDTO {
     constructor(
         public id: string,
         public wallSensors: SensorDTO[],
-        public materials: MaterialDTO[]
+        public material: MaterialDTO
     ) {}
 }

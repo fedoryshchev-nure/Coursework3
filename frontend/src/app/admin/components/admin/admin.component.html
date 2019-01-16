@@ -2,8 +2,41 @@
   <br>
   <br>
   <div class="row">
-    <div class="col-4 offset-4">
-      <form [formGroup]="amountForm" #amntFom="ngForm">
+    <div class="col-8 offset-2">
+      <div class="row"> 
+        <button (click)="materialFormSelectedClick()" class="btn btn-primary">Create new material form</button>
+        &nbsp; &nbsp;
+        <button (click)="admountFormSelectedClick()" class="btn btn-primary">Create new wall form</button>
+        &nbsp; &nbsp;
+        <button (click)="attachFormSelectedClick()" class="btn btn-primary">Attach wall to user form</button>
+      </div>
+
+      <br>
+      <br>
+
+      <form *ngIf="materialFormSelected" [formGroup]="materialForm" #matFom="ngForm">
+        
+        <div class="form-group">
+          <label>{{'Add new material' | translate}}:</label>
+          <input class="form-control" formControlName="Name" required >
+        </div>
+        <div class="alert alert-danger" *ngIf="matFom.submitted && this.materialForm.controls[material].errors">
+          <div *ngIf="this.materialForm.controls[material].errors.required">
+            {{'Material is required' | translate}}.
+          </div>
+          <div *ngIf="this.materialForm.controls[material].errors.min">
+            {{'Material is too small' | translate}}.
+          </div>
+          <div *ngIf="this.materialForm.controls[material].errors.max">
+            {{'Material is to big' | translate}}.
+          </div>
+        </div>
+
+        <button type="submit" (click)="onMaterialFormSubmit()" class="btn btn-primary">Add new material</button>
+        <div *ng ></div>
+      </form>
+
+      <form *ngIf="admountFormSelected"[formGroup]="amountForm" #amntFom="ngForm">
           
         <div class="form-group">
           <label>{{'Amount of sensors in wall' | translate}}:</label>
@@ -21,24 +54,34 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label for="sel1">Select list:</label>
+          <select class="form-control" id="sel1">
+            <option (click)="setSelectedMaterial(material.id)" *ngFor="let material of materials">{{material.name}}</option>
+          </select>
+        </div> 
+
         <button type="submit" (click)="onAmountFormSubmit()" class="btn btn-primary">Create wall</button>
       </form>
-
-      <div *ngIf="sensorDTOs.length">
+      <br>
+      <br>
+      <div *ngIf="sensorDTOs.length && admountFormSelected">
         {{'Wall Id' | translate}}: {{sensorDTOs[0].wallId}}
         <br>
-        <div class="row" *ngFor="let dto of sensorDTOs">
-          <div class="col">
+        <br>
+        <div class="col" *ngFor="let dto of sensorDTOs">
+          <div class="row">
             {{'Id' | translate}}: {{dto.id}}
           </div >
-          <div class="col">
+          <div class="row">
             {{'Passsword' | translate}}: {{dto.password}}
           </div>
+          <br>
           <br>
         </div>
       </div>
 
-      <form [formGroup]="wallToUserForm" #wallUserForm="ngForm">
+      <form *ngIf="attachFormSelected" [formGroup]="wallToUserForm" #wallUserForm="ngForm">
           
         <div class="form-group">
           <label>{{'User email' | translate}}:</label>

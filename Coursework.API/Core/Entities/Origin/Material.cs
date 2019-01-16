@@ -1,5 +1,5 @@
-﻿using Core.Entities.CrossTable;
-using Core.Models;
+﻿using Core.Models;
+using Core.Models.Origin;
 using System.Collections.Generic;
 
 namespace Core.Entities.Origin
@@ -9,6 +9,6 @@ namespace Core.Entities.Origin
         public string Id { get; set; }
         public string Name { get; set; }
 
-        public IEnumerable<WallMaterial> Walls { get; set; } = new List<WallMaterial>();
+        public IEnumerable<Wall> Walls { get; set; } = new List<Wall>();
     }
 }

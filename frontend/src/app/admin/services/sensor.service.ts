@@ -7,6 +7,8 @@ import { environment } from 'environments/environment';
 import { SensorDTO } from '../models/sensor-dto';
 import { UserWallDTO } from '../models/user-wall-dto';
 import { MaterialDTO } from 'app/walls-state/dtos/material-dto';
+import { WallDTO } from 'app/walls-state/dtos/wall-dto';
+import { CreateWallDTO } from '../models/create-wall-dto';
 
 const headers = new HttpHeaders({
   'Content-Type': 'application/json; charset=utf-8',
@@ -21,9 +23,10 @@ export class SensorService {
     private http: HttpClient
   ) { }
 
-  public createSensors(amount: number): Observable<SensorDTO[]> {
-    return this.http.get<SensorDTO[]>(
-      `${environment.apiLink}/admin/createSensors/${amount}`,
+  public createSensors(wallDTO: CreateWallDTO): Observable<SensorDTO[]> {
+    return this.http.post<SensorDTO[]>(
+      `${environment.apiLink}/admin/createSensors/`,
+      wallDTO,
       { headers: headers }
     );
   }
@@ -41,6 +44,14 @@ export class SensorService {
     return this.http.post(
       `${environment.apiLink}/admin/CreateMaterial`,
       materialDTO,
+      { headers }
+    );
+  }
+
+  
+  public GetMaterials(): Observable<MaterialDTO[]> {
+    return this.http.get<MaterialDTO[]>(
+      `${environment.apiLink}/admin/GetMaterials`,
       { headers }
     );
   }

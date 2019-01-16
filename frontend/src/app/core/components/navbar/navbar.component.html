@@ -2,9 +2,10 @@
     <nav class="navbar navbar-dark bg-primary">
       <div class="navbar-brand">
         <a routerLink="/" class="navbar-brand">{{'Home' | translate}}</a>
-        <a routerLink="state/data" class="navbar-brand">{{'My walls' | translate}}</a>
-        <a routerLink="state/statistics" class="navbar-brand">{{'Statistics' | translate}}</a>
-        <a routerLink="state/automatization" class="navbar-brand">{{'Automatization' | translate}}</a>
+        <a *ngIf="!isSignedIn()" routerLink="state/iot" class="navbar-brand">{{'IOT' | translate}}</a>      
+        <a *ngIf="isUser()" routerLink="state/data" class="navbar-brand">{{'My walls' | translate}}</a>
+        <a *ngIf="isUser()" routerLink="state/statistics" class="navbar-brand">{{'Statistics' | translate}}</a>
+        <a *ngIf="isUser()" routerLink="state/automatization" class="navbar-brand">{{'Automatization' | translate}}</a>
       </div>
       <div class="btn-group">
         <div (click)="onButtonGroupClick($event)" class="btn-group">

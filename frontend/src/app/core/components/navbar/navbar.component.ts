@@ -37,4 +37,14 @@ export class NavbarComponent implements OnInit {
       clickedElement.className += " active";
     }
   }
+
+  public isUser(): boolean {
+    return this.authService.
+      isUser();
+  }
+
+  public isSignedIn(): boolean {
+    return this.authService
+      .isSignedIn();
+  }
 }
