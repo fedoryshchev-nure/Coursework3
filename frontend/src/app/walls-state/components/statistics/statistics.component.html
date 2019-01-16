@@ -1,29 +1,27 @@
 <div class="container">
   <br>
   <div class="col">
-    <button (click)="onRegionsClick()" class="btn btn-primary">Show statistic about regions</button>
+    <button (click)="onRegionsClick()" class="btn btn-primary">{{'Show statistic about regions' | translate}}</button>
     &nbsp; &nbsp;
-    <button (click)="onMaterialsClick()" class="btn btn-primary">Show statistic about materials</button>
+    <button (click)="onMaterialsClick()" class="btn btn-primary">{{'Show statistic about materials' | translate}}</button>
   </div>
 <br>
 <br>
   <div class="col">
     <div *ngIf="regions">
-      Regions with most damaged walls:
+      {{'Regions with most damaged walls' | translate}}:
       <br>
       <div *ngFor="let dto of regions$ | async; let i = index">
-        {{i + 1}}. Country: {{dto}}
+        {{i + 1}}. {{'Country' | translate}}: {{dto}}
       </div>
     </div>
     
     <div *ngIf="materials"> 
-      Worst materials:
+      {{'Worst materials' | translate}}:
       <br>
       <div *ngFor="let dto of materials$ | async; let i = index">
-        {{i + 1}}. Material: {{dto}}
+        {{i + 1}}. {{'Material' | translate}}: {{dto}}
       </div>
     </div>
   </div>
-
-
 </div>

@@ -42,5 +42,32 @@
 
   "Get current wall state": "Отримати стан стiн",
   "Walls are fine": "Усе гаразд",
-  "Walls are not fine": "Усе не гаразд"
+  "Walls are not fine": "Усе не гаразд",
+
+
+
+  "Country is required": "Введiть країну",
+  "Country": "Країна",
+  "Create new material form": "Додати новий матерiал",
+  "Create new wall form": "Додати нову стiну",
+  "Attach wall to user form": "Закріпити стіни за користувачем",
+  "Add new material": "Додати новий матеріал",
+  "Create wall": "Створити стіну",
+  "Select material of wall": "Виберіть матеріал стіни",
+  "My walls": "Мої стіни",
+  "Statistics": "Статистика",
+  "Automatization": "Автоматизація",
+  "Best regions to live in": "Кращі регіони для проживання",
+  "Most safe materials for houses": "Найбільш безпечні матеріали для будинків",
+  "Top 3 most safe regions": "Трійка найбільш безпечних регіонів",
+  "Top 3 best materials": "3 найкращих матеріали",
+  "Material": "Матеріал",
+  "Show statistic about regions": "Показати статистику про регіони",
+  "Show statistic about materials": "Показати статистику про матеріали",
+  "Regions with most damaged walls": "Регіони з найбільш пошкодженими стінами",
+  "Worst materials": "Найгірші матеріали",
+  "Show state of sensors in walls": "Показати стан датчиків у стінах",
+  "Show material of wall": "Показати матеріал стіни",
+  "Material of wall": "Матеріал стіни",
+  "Sensors Id": "Iдентифiкатор датчику"
 }

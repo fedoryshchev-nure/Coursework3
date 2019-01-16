@@ -15,7 +15,7 @@ export class IotComponent implements OnInit {
   iotForm = this.fb.group({
     Id: ['', Validators.required],
     Password: ['', Validators.required],
-    IsBroken: [false, Validators.required]
+    IsBroken: [0, Validators.required]
   });
 
   constructor(

@@ -4,11 +4,11 @@
   <div class="row">
     <div class="col-8 offset-2">
       <div class="row"> 
-        <button (click)="materialFormSelectedClick()" class="btn btn-primary">Create new material form</button>
+        <button (click)="materialFormSelectedClick()" class="btn btn-primary">{{'Create new material form' | translate}}</button>
         &nbsp; &nbsp;
-        <button (click)="admountFormSelectedClick()" class="btn btn-primary">Create new wall form</button>
+        <button (click)="admountFormSelectedClick()" class="btn btn-primary">{{'Create new wall form' | translate}}</button>
         &nbsp; &nbsp;
-        <button (click)="attachFormSelectedClick()" class="btn btn-primary">Attach wall to user form</button>
+        <button (click)="attachFormSelectedClick()" class="btn btn-primary">{{'Attach wall to user form' | translate}}</button>
       </div>
 
       <br>
@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <button type="submit" (click)="onMaterialFormSubmit()" class="btn btn-primary">Add new material</button>
+        <button type="submit" (click)="onMaterialFormSubmit()" class="btn btn-primary">{{'Add new material' | translate}}</button>
         <div *ng ></div>
       </form>
 
@@ -55,16 +55,15 @@
         </div>
 
         <div class="form-group">
-          <label for="sel1">Select list:</label>
+          <label for="sel1">{{'Select material of wall' | translate}}:</label>
           <select class="form-control" id="sel1">
             <option (click)="setSelectedMaterial(material.id)" *ngFor="let material of materials">{{material.name}}</option>
           </select>
         </div> 
 
-        <button type="submit" (click)="onAmountFormSubmit()" class="btn btn-primary">Create wall</button>
+        <button type="submit" (click)="onAmountFormSubmit()" class="btn btn-primary">{{'Create wall' | translate}}</button>
       </form>
-      <br>
-      <br>
+      
       <div *ngIf="sensorDTOs.length && admountFormSelected">
         {{'Wall Id' | translate}}: {{sensorDTOs[0].wallId}}
         <br>

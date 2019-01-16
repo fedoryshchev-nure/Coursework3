@@ -2,23 +2,23 @@
   <br>
   <br>
   <div class="col">
-    <button (click)="onShowBrokenClick()" class="btn btn-primary">Show state of sensors in walls</button>
+    <button (click)="onShowBrokenClick()" class="btn btn-primary">{{'Show state of sensors in walls' | translate}}</button>
     &nbsp; &nbsp;
-    <button (click)="onShowMaterialClick()" class="btn btn-primary">Show material of wall</button>
+    <button (click)="onShowMaterialClick()" class="btn btn-primary">{{'Show material of wall' | translate}}</button>
   </div>
   <br>
   <br>
   <div class="col" *ngFor="let dto of wallDTOs$ | async">
-    Wall Id: {{dto.id}}
+    {{'Wall Id' | translate}}: {{dto.id}}
     <div *ngIf="showMaterial">
-      Material of wall: {{dto.material.name}}
+      {{'Material of wall' | translate}}: {{dto.material.name}}
     </div>
     <div *ngIf="showBroken">
       <br>
       <br>
       <div  class="col" *ngFor="let sensor of dto.wallSensors; if ">
         <div class="row">
-          Sensors Id: {{sensor.id}}
+          {{'Sensors Id' | translate}}: {{sensor.id}}
         </div>
         <div *>
           <div class="row">

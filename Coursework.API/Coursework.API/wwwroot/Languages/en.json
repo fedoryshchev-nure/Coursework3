@@ -43,5 +43,32 @@
 
   "Get current wall state": "Get current wall state",
   "Walls are fine": "Walls are fine",
-  "Walls are not fine": "Walls are not fine"
+  "Walls are not fine": "Walls are not fine",
+
+
+
+  "Country is required": "Country is required",
+  "Country": "Country",
+  "Create new material form": "Create new material form",
+  "Create new wall form": "Create new wall form",
+  "Attach wall to user form": "Attach wall to user form",
+  "Add new material": "Add new material",
+  "Create wall": "Create wall",
+  "Select material of wall": "Select material of wall",
+  "My walls": "My walls",
+  "Statistics": "Statistics",
+  "Automatization": "Automatization",
+  "Best regions to live in": "Best regions to live in",
+  "Most safe materials for houses": "Most safe materials for houses",
+  "Top 3 most safe regions": "Top 3 most safe regions",
+  "Top 3 best materials": "Top 3 best materials",
+  "Material": "Material",
+  "Show statistic about regions": "Show statistic about regions",
+  "Show statistic about materials": "Show statistic about materials",
+  "Regions with most damaged walls": "Regions with most damaged walls",
+  "Worst materials": "Worst materials",
+  "Show state of sensors in walls": "Show state of sensors in walls",
+  "Show material of wall": "Show material of wall",
+  "Material of wall": "Material of wall",
+  "Sensors Id": "Sensors Id"
 }
